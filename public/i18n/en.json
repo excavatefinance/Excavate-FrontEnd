@@ -639,7 +639,7 @@
     {
       "data": {
         "stringId": 532,
-        "text": "Harvest all (%count%)"
+        "text": "Mine all (%count%)"
       }
     },
     {
@@ -651,13 +651,13 @@
     {
       "data": {
         "stringId": 536,
-        "text": "Total Minted"
+        "text": "Total extracted"
       }
     },
     {
       "data": {
         "stringId": 538,
-        "text": "Total Burned"
+        "text": "Total Crushed"
       }
     },
     {
@@ -669,7 +669,7 @@
     {
       "data": {
         "stringId": 542,
-        "text": "Farms & Staking"
+        "text": "Mines & Smelting"
       }
     },
     {
