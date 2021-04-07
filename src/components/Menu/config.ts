@@ -3,7 +3,7 @@ import { MenuEntry } from '@pancakeswap-libs/uikit'
 const config: MenuEntry[] = [
   {
     label: 'Home',
-    icon: 'GooseIcon',
+    icon: 'HomeIcon',
     href: '/',
   },
   {
