@@ -23,7 +23,7 @@ const Hero = styled.div`
   text-align: center;
 
   ${({ theme }) => theme.mediaQueries.lg} {
-    background-image: url('/images/excavate/mine-entrance.jpg'), url('/images/excavate/mine-entrance-right.jpg');
+    background-image: url('/images/excavate/Mine-cart.jpg'), url('/images/excavate/mine-entrance-right.jpg');
     background-position: left center, right center;
     height: 165px;
     padding-top: 0;
