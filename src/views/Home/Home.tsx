@@ -25,7 +25,7 @@ const Hero = styled.div`
   ${({ theme }) => theme.mediaQueries.lg} {
     background-image: url('/images/excavate/Mine-cart.jpg'), url('/images/excavate/mine-entrance-right.jpg');
     background-position: left center, right center;
-    height: 165px;
+    height: 145px;
     padding-top: 0;
   }
 `
