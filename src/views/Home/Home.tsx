@@ -22,7 +22,7 @@ const Hero = styled.div`
   padding-top: 116px;
   text-align: center;
 
-  ${({ theme }) => theme.mediaQueries.lg} {
+  ${({ theme }) => isDark.mediaQueries.lg} {
 	background-image: url('/images/excavate/Mine-cart.jpg'), url('/images/axe/mine-day.jpg');
     background-position: left center, right center;
     height: 145px;
@@ -52,15 +52,15 @@ const Cards = styled(BaseLayout)`
     }
   }
 `
-
+<image className="header__background" width="100%" height="100%" href={isDark ? '/images/axe/mine-day.jpg' : '/images/axe/mine-night.jpg'}/>
+        
 const Home: React.FC = () => {
   const TranslateString = useI18n()
 
   return (
     <Page>
       <Hero>
-		<image className="header__background" width="100%" height="100%" href={isDark ? '/images/axe/mine-day.jpg' : '/images/axe/mine-night.jpg'}/>
-        <Heading as="h1" size="xl" mb="24px" color="secondary">
+		<Heading as="h1" size="xl" mb="24px" color="secondary">
           {TranslateString(576, 'Excavate Finance')}
         </Heading>
         <Text>{TranslateString(578, 'The all in one DeFi app on the Binance Smart Chain.')}</Text>
