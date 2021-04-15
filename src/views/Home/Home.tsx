@@ -59,7 +59,7 @@ const Home: React.FC = () => {
   return (
     <Page>
       <Hero>
-		<image class="header__background" width="100%" height="100%" href={isDark ? '/images/axe/mine-day.jpg' : '/images/axe/mine-night.jpg'}/>
+		<image className="header__background" width="100%" height="100%" href={isDark ? '/images/axe/mine-day.jpg' : '/images/axe/mine-night.jpg'}/>
         <Heading as="h1" size="xl" mb="24px" color="secondary">
           {TranslateString(576, 'Excavate Finance')}
         </Heading>
