@@ -22,7 +22,7 @@ const Hero = styled.div`
   padding-top: 116px;
   text-align: center;
 
-  ${({ theme }) => isDark.mediaQueries.lg} {
+  ${({ theme }) => theme.mediaQueries.lg} {
 	background-image: url('/images/excavate/Mine-cart.jpg'), url('/images/axe/mine-day.jpg');
     background-position: left center, right center;
     height: 145px;
