@@ -77,12 +77,12 @@ const Home: React.FC = () => {
 
   return (
     <Page>
-      <{isDark ? Hero : Hero2}>
+      {isDark ? <Hero> : <Hero2>}
         <Heading as="h1" size="xl" mb="24px" color="secondary">
           {TranslateString(576, 'Excavate Finance')}
         </Heading>
         <Text>{TranslateString(578, 'The all in one DeFi app on the Binance Smart Chain.')}</Text>
-      </{isDark ? Hero : Hero2}>
+      {isDark ? </Hero> : </Hero2>}>
       <div>
         <Cards>
 		  <FarmStakingCard />
