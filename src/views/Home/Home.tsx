@@ -52,8 +52,6 @@ const Cards = styled(BaseLayout)`
     }
   }
 `
-<image className="header__background" width="100%" height="100%" href={isDark ? '/images/axe/mine-day.jpg' : '/images/axe/mine-night.jpg'}/>
-        
 const Home: React.FC = () => {
   const TranslateString = useI18n()
 
