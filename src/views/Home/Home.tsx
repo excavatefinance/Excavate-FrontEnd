@@ -11,6 +11,26 @@ import TwitterCard from './components/TwitterCard'
 
 const Hero = styled.div`
   align-items: center;
+  background-image: url('/images/axe/mine-entrance.jpg');
+  background-repeat: no-repeat;
+  background-position: top center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+  margin-bottom: 32px;
+  padding-top: 116px;
+  text-align: center;
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+	background-image: url('/images/excavate/Mine-cart.jpg'), url('/images/axe/mine-day.jpg');
+    background-position: left center, right center;
+    height: 145px;
+    padding-top: 0;
+  }
+`
+const Hero2 = styled.div`
+  align-items: center;
   background-image: url('/images/excavate/mine-entrance.jpg');
   background-repeat: no-repeat;
   background-position: top center;
@@ -23,16 +43,15 @@ const Hero = styled.div`
   text-align: center;
 
   ${({ theme }) => theme.mediaQueries.lg} {
-    background-image: url('/images/excavate/Mine-cart.jpg'), url('/images/excavate/mine-entrance-right.jpg');
+	background-image: url('/images/excavate/Mine-cart.jpg'), url('/images/axe/mine-night.jpg');
     background-position: left center, right center;
     height: 145px;
     padding-top: 0;
   }
 `
-
 const Cards = styled(BaseLayout)`
   align-items: stretch;
-  justify-content: stretch;
+  justify-content: stretch; 
   margin-bottom: 48px;
 
   & > div {
@@ -58,12 +77,12 @@ const Home: React.FC = () => {
 
   return (
     <Page>
-      <Hero>
+      <{isDark ? Hero : Hero2}>
         <Heading as="h1" size="xl" mb="24px" color="secondary">
           {TranslateString(576, 'Excavate Finance')}
         </Heading>
         <Text>{TranslateString(578, 'The all in one DeFi app on the Binance Smart Chain.')}</Text>
-      </Hero>
+      </{isDark ? Hero : Hero2}>
       <div>
         <Cards>
 		  <FarmStakingCard />
