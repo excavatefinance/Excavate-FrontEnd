@@ -29,9 +29,13 @@
     <meta name="twitter:title" content="Excavate Finance - A new DeFi exchange on Binance Smart Chain (BSC) to earn wrapped BTC" />
     <script>jQuery(document).ready(function() {
  				jQuery(".theme__toggle").click(function() {
-    				jQuery(".hero").toggleClass("heronight");
-    				jQuery(".mine__cart").toggleClass("mine__cartnight");
-    				jQuery(".furnace").toggleClass("furnacenight");
+    				jQuery(".hero").toggleClass("night");
+    				jQuery(".mine__cart").toggleClass("night");
+  				});
+			});
+			jQuery(document).ready(function() {
+ 				jQuery(".theme__toggle").click(function() {
+    				jQuery(".smelter").toggleClass("nightsmelt");
   				});
 			});
 	</script>
@@ -42,7 +46,7 @@
    			height: 145px;
     		padding-top: 0;  			
 		}
-		.heronight {
+		.hero.night {
   			background-image: url('/images/excavate/Mine-cart.jpg'),  url('/images/axe/mine_night.svg');
     		background-position: left center, right center;
    			height: 145px;
@@ -53,18 +57,18 @@
     	background-position: center;
    		background-size: contain;
 		}
-		.mine__cartnight {
+		.mine__cart.night {
 		background-image: url(/images/axe/mine_cart_night.svg);
     	background-position: center;
    		background-size: contain;
 		}		
-		.furnace {
+		.smelter {
 		background-image: url('/images/axe/furnace_day.svg');
   		background-repeat: no-repeat;
   		background-position: top right;
   		min-height: 376px;
 		}
-		.furnacenight {
+		.smelter.nightsmelt {
 		background-image: url('/images/axe/furnace_night.svg');
   		background-repeat: no-repeat;
   		background-position: top right;
