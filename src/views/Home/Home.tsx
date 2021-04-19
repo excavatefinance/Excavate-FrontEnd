@@ -23,7 +23,7 @@ const Hero = styled.div`
   text-align: center;
 
   ${({ theme }) => theme.mediaQueries.lg} {
-	background-image: url('/images/excavate/Mine-cart.jpg'), url('/images/axe/mine_day.svg');
+	background-image: url('/images/axe/mine_day.svg');
     background-position: left center, right center;
     height: 145px;
     padding-top: 0;
@@ -57,7 +57,7 @@ const Home: React.FC = () => {
 
   return (
     <Page>
-      <Hero>
+      <Hero className="hero">
 		<Heading as="h1" size="xl" mb="24px" color="secondary">
           {TranslateString(576, 'Excavate Finance')}
         </Heading>
