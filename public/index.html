@@ -30,6 +30,7 @@
     <script>jQuery(document).ready(function() {
  				jQuery(".theme__toggle").click(function() {
     				jQuery(".hero").toggleClass("night");
+    				jQuery(".mine__cart").toggleClass("night");
   				});
 			});
 	</script>
@@ -46,6 +47,17 @@
    			height: 145px;
     		padding-top: 0;
 		}
+		.mine__cart {
+		background-image: url(/images/axe/mine_cart_day.svg);
+    	background-position: center;
+   		background-size: contain;
+		}
+		.mine__cart.night {
+		background-image: url(/images/axe/mine_cart_night.svg);
+    	background-position: center;
+   		background-size: contain;
+		}		
+		
 	</style>
   </head>
   <body>

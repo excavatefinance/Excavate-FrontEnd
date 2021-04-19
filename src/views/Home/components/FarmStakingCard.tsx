@@ -28,6 +28,9 @@ const Block = styled.div`
 
 const CardImage = styled.img`
   margin-bottom: 16px;
+  background-image: url(/images/axe/mine_cart_day.svg);
+  background-position: center;
+  background-size: contain;
 `
 
 const Label = styled.div`
@@ -71,7 +74,7 @@ const FarmedStakingCard = () => {
         <Heading size="xl" mb="24px">
           {TranslateString(542, 'Mines & Smelting')}
         </Heading>
-        <CardImage src="/images/axe/mine_cart_day.svg" alt="mine_cart_logo" width={64} height={64} />
+        <CardImage className="mine__cart" />
         <Block>
           <Label>{TranslateString(544, 'EGG to Harvest')}</Label>
           <CakeHarvestBalance earningsSum={earningsSum}/>
