@@ -67,7 +67,7 @@ const FarmedStakingCard = () => {
   }, [onReward])
 
   return (
-    <StyledFarmStakingCard className="smelter">
+    <StyledFarmStakingCard className="furnace">
       <CardBody>
         <Heading size="xl" mb="24px">
           {TranslateString(542, 'Mines & Smelting')}
