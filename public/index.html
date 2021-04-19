@@ -31,6 +31,7 @@
  				jQuery(".theme__toggle").click(function() {
     				jQuery(".hero").toggleClass("night");
     				jQuery(".mine__cart").toggleClass("night");
+    				jQuery(".smelter").toggleClass("night");
   				});
 			});
 	</script>
@@ -57,6 +58,18 @@
     	background-position: center;
    		background-size: contain;
 		}		
+		.smelter{
+		background-image: url('/images/axe/furnace_day.svg');
+  		background-repeat: no-repeat;
+  		background-position: top right;
+  		min-height: 376px;
+		}
+		.smelter.night{
+		background-image: url('/images/axe/furnace_night.svg');
+  		background-repeat: no-repeat;
+  		background-position: top right;
+  		min-height: 376px;		
+		}
 		
 	</style>
   </head>
