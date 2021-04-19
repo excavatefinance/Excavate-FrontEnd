@@ -17,10 +17,13 @@ import { getBalanceNumber } from '../../../utils/formatBalance'
 
 const StyledFarmStakingCard = styled(Card)`
 `
-
+const CardWrapper = styled.div`
+  
+`
 const Block = styled.div`
   margin-bottom: 16px;
 `
+
 
 const CardImage = styled.div`
   margin-bottom: 16px;
@@ -67,7 +70,8 @@ const FarmedStakingCard = () => {
   }, [onReward])
 
   return (
-    <StyledFarmStakingCard className="smelt">
+    <StyledFarmStakingCard>
+	  <CardWrapper className="smelt">	
       <CardBody>
         <Heading size="xl" mb="24px">
           {TranslateString(542, 'Mines & Smelting')}
@@ -100,6 +104,7 @@ const FarmedStakingCard = () => {
           )}
         </Actions>
       </CardBody>
+	  </CardWrapper>
     </StyledFarmStakingCard>
   )
 }
