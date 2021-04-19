@@ -26,11 +26,13 @@ const Block = styled.div`
   margin-bottom: 16px;
 `
 
-const CardImage = styled.img`
+const CardImage = styled.div`
   margin-bottom: 16px;
   background-image: url(/images/axe/mine_cart_day.svg);
   background-position: center;
   background-size: contain;
+  height: 64px;
+  width: 64px;
 `
 
 const Label = styled.div`
