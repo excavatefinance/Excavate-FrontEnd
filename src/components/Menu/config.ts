@@ -30,6 +30,16 @@ const config: MenuEntry[] = [
     icon: 'PoolIcon',
     href: '/nests',
   },
+  {
+    label: 'LaunchPad',
+    icon: 'GooseIcon',
+    href: 'https://docs.google.com/forms/d/e/1FAIpQLSe7ycrw8Dq4C5Vjc9WNlRtTxEhFDB1Ny6jlAByZ2Y6qBo7SKg/viewform?usp=sf_link',
+  },
+  {
+    label: 'Token Lockups',
+    icon: '',
+    href: '/lockups',
+  },
   // {
   //   label: 'Pools',
   //   icon: 'PoolIcon',
