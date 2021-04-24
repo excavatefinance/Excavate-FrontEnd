@@ -1,1 +1,1 @@
-export { default } from './locks'
+export { default } from './Farms'
