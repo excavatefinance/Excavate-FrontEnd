@@ -38,7 +38,7 @@ const config: MenuEntry[] = [
  {
     label: 'Token Lockups',
    icon: 'PoolIcon',
-   href: 'https://www.google.co.uk',
+   href: '/locks',
   },
   // {
   //   label: 'Pools',
