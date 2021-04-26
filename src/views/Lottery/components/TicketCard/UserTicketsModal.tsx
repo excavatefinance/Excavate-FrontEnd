@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { Button, Modal } from '@pancakeswap-libs/uikit'
+import { Button, Modal } from 'voidfarm-toolkit'
 import styled from 'styled-components'
 import { useWinningNumbers } from 'hooks/useTickets'
 import useI18n from 'hooks/useI18n'
@@ -42,7 +42,10 @@ const UserTicketsModal: React.FC<UserTicketsModalProps> = ({ myTicketNumbers, on
   })
 
   return (
-    <Modal title={TranslateString(490, `My Tickets (Total: ${myTicketNumbers.length})`)} onDismiss={onDismiss}>
+    <Modal
+      title={TranslateString(490, `My Tickets (Total: ${myTicketNumbers.length})`, { TICKETS: myTicketNumbers.length })}
+      onDismiss={onDismiss}
+    >
       <TicketsList>
         <h2>{listItems}</h2>
       </TicketsList>

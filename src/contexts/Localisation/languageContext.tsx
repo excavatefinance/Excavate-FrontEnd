@@ -57,22 +57,18 @@ const LanguageContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (selectedLanguage) {
-      console.log(`import(\`../../../public/i18n/${selectedLanguage.code}.json\`)`);
-      fetch(`./i18n/${selectedLanguage.code}.json`)
-        .then(r=>r.json())
-      // fetchTranslationsForSelectedLanguage(selectedLanguage)
+      fetchTranslationsForSelectedLanguage(selectedLanguage)
         .then((translationApiResponse) => {
           if (translationApiResponse.data.length < 1) {
-            setTranslations(['error'])
+            setTranslations([])
           } else {
             setTranslations(translationApiResponse.data)
           }
         })
         .then(() => setTranslatedLanguage(selectedLanguage))
         .catch((e) => {
-          console.error("ERROR");
-          console.error(e);
-          setTranslations(['error'])
+          setTranslations([])
+          console.error('Error while loading translations', e)
         })
     }
   }, [selectedLanguage, setTranslations])

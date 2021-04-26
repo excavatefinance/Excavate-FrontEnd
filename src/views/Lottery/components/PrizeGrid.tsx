@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import useI18n from 'hooks/useI18n'
-import { Heading, Text } from '@pancakeswap-libs/uikit'
+import { Heading, Text } from 'voidfarm-toolkit'
 
 export interface PrizeGridProps {
   lotteryPrizeAmount?: number
   pastDraw?: boolean
   jackpotMatches?: number
+  oneTicketMatches?: number
   twoTicketMatches?: number
   threeTicketMatches?: number
 }
@@ -50,19 +51,19 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
     <Grid pastDraw={pastDraw}>
       <GridItem>
         <Text fontSize="14px" color="textSubtle">
-          {TranslateString(999, 'No. Matched')}
+          {TranslateString(756, 'No. Matched')}
         </Text>
       </GridItem>
       {pastDraw && (
         <PastDrawGridItem>
           <RightAlignedText fontSize="14px" color="textSubtle">
-            {TranslateString(999, 'Winners')}
+            {TranslateString(754, 'Winners')}
           </RightAlignedText>
         </PastDrawGridItem>
       )}
       <GridItem>
         <RightAlignedText fontSize="14px" color="textSubtle">
-          {TranslateString(999, 'Prize Pot')}
+          {TranslateString(752, 'Prize Pot')}
         </RightAlignedText>
       </GridItem>
       {/* 4 matches row */}
@@ -90,15 +91,15 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
         <RightAlignedText>{threeMatchesAmount.toLocaleString()}</RightAlignedText>
       </GridItem>
       {/* 2 matches row */}
-      <GridItem marginBottom="20px">
+      <GridItem>
         <Text>2</Text>
       </GridItem>
       {pastDraw && (
-        <PastDrawGridItem marginBottom="20px">
+        <PastDrawGridItem>
           <RightAlignedText>{twoTicketMatches}</RightAlignedText>
         </PastDrawGridItem>
       )}
-      <GridItem marginBottom="20px">
+      <GridItem>
         <RightAlignedText>{twoMatchesAmount.toLocaleString()}</RightAlignedText>
       </GridItem>
       {/* Burn row */}

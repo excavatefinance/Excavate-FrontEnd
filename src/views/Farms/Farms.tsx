@@ -30,8 +30,10 @@ const ControlContainer = styled.div`
   width: 100%;
   align-items: center;
   position: relative;
+
   justify-content: space-between;
   flex-direction: column;
+
   ${({ theme }) => theme.mediaQueries.sm} {
     flex-direction: row;
     flex-wrap: wrap;
@@ -50,6 +52,7 @@ const ToggleWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-left: 10px;
+
   ${Text} {
     margin-left: 8px;
   }
@@ -66,6 +69,7 @@ const FilterContainer = styled.div`
   align-items: center;
   width: 100%;
   padding: 8px 0px;
+
   ${({ theme }) => theme.mediaQueries.sm} {
     width: auto;
     padding: 0;
@@ -78,12 +82,15 @@ const ViewControls = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+
   > div {
     padding: 8px 0px;
   }
+
   ${({ theme }) => theme.mediaQueries.sm} {
     justify-content: flex-start;
     width: auto;
+
     > div {
       padding: 0;
     }
@@ -100,8 +107,10 @@ const StyledImage = styled(Image)`
 const Header = styled.div`
   padding: 32px 0px;
   background: ${({ theme }) => theme.colors.gradients.bubblegum};
+
   padding-left: 16px;
   padding-right: 16px;
+
   ${({ theme }) => theme.mediaQueries.sm} {
     padding-left: 24px;
     padding-right: 24px;

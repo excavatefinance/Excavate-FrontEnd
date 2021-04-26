@@ -1,4 +1,4 @@
-import { MenuEntry } from '@pancakeswap-libs/uikit'
+import { MenuEntry } from 'voidfarm-toolkit'
 
 const config: MenuEntry[] = [
   {
@@ -12,99 +12,44 @@ const config: MenuEntry[] = [
     items: [
       {
         label: 'Exchange',
-        href: 'https://exchange.goosedefi.com/',
+        href: 'https://exchange.pancakeswap.finance/#/swap',
       },
       {
         label: 'Liquidity',
-        href: 'https://exchange.goosedefi.com/#/pool',
+        href: 'https://exchange.pancakeswap.finance/#/pool',
       },
     ],
   },
   {
-    label: 'Mines',
+    label: 'Farms (coming soon..)',
     icon: 'FarmIcon',
     href: '/farms',
   },
   {
-    label: 'Smelting',
+    label: 'Pools (coming soon..)',
     icon: 'PoolIcon',
-    href: '/nests',
+    href: '/pools',
   },
   {
-    label: 'LaunchPad',
-    icon: 'GooseIcon',
-    href: 'https://docs.google.com/forms/d/e/1FAIpQLSe7ycrw8Dq4C5Vjc9WNlRtTxEhFDB1Ny6jlAByZ2Y6qBo7SKg/viewform?usp=sf_link',
-  },
- {
-    label: 'Token Lockups',
-   icon: 'PoolIcon',
-   href: '/locks',
-  },
-  // {
-  //   label: 'Pools',
-  //   icon: 'PoolIcon',
-  //   href: '/pools',
-  // },
-  // {
-  //   label: 'Lottery',
-  //   icon: 'TicketIcon',
-  //   href: '/lottery',
-  // },
-  // {
-  //   label: 'NFT',
-  //   icon: 'NftIcon',
-  //   href: '/nft',
-  // },
-  {
-    label: 'Info',
-    icon: 'InfoIcon',
-    items: [
-      {
-        label: 'PancakeSwap',
-        href: 'https://pancakeswap.info/token/0xF952Fc3ca7325Cc27D15885d37117676d25BfdA6',
-      },
-      {
-        label: 'CoinGecko',
-        href: 'https://www.coingecko.com/en/coins/goose-finance',
-      },
-      {
-        label: 'CoinMarketCap',
-        href: 'https://coinmarketcap.com/currencies/goose-finance/',
-      },
-      {
-        label: 'AstroTools',
-        href: 'https://app.astrotools.io/pancake-pair-explorer/0x19e7cbecdd23a16dfa5573df54d98f7caae03019',
-      },
-    ],
+    label: "Medium",
+    icon: "MediumIcon",
+    href: "https://voidfarm.medium.com/",
   },
   {
-    label: 'More',
-    icon: 'MoreIcon',
-    items: [
-      {
-        label: 'Github',
-        href: 'https://github.com/excavatefinance',
-      },
-      {
-        label: 'Docs',
-        href: 'https://goosedefi.gitbook.io/goose-finance/',
-      },
-      {
-        label: 'Blog',
-        href: 'https://medium.com/@excavate.finance',
-      },
-    ],
+    label: "Github",
+    icon: "GithubIcon",
+    href: "https://github.com/voidfarm",
   },
-  // {
-  //  label: 'Audit by Hacken',
-  //  icon: 'AuditIcon',
-  //  href: 'https://www.goosedefi.com/files/hackenAudit.pdf',
-  // },
- // {
-   // label: 'Audit by CertiK',
-   // icon: 'AuditIcon',
-   // href: 'https://certik.org/projects/goose-finance',
-  // },
+  {
+    label: "Docs",
+    icon: "TicketIcon",
+    href: "https://voidfarm.gitbook.io/void-farm/",
+  },
+  {
+    label: 'Audit (coming soon..)',
+    icon: 'AuditIcon',
+    href: '',
+  },
 ]
 
 export default config

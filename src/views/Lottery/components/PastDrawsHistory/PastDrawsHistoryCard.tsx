@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Card, CardBody } from '@pancakeswap-libs/uikit'
+import { Heading, Card, CardBody } from 'voidfarm-toolkit'
 import useI18n from 'hooks/useI18n'
 import HistoryChart from './HistoryChart'
 import Legend from './Legend'
@@ -10,7 +10,7 @@ const PastDrawsHistoryCard: React.FC = () => {
   return (
     <Card>
       <CardBody>
-        <Heading size="md">{TranslateString(999, 'History')}</Heading>
+        <Heading size="md">{TranslateString(746, 'History')}</Heading>
         <Legend />
         <HistoryChart />
       </CardBody>

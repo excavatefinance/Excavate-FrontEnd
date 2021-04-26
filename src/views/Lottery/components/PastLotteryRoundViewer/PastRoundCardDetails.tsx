@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, CardBody, CardFooter, PancakeRoundIcon, TicketRound } from '@pancakeswap-libs/uikit'
+import { Heading, CardBody, CardFooter, PancakeRoundIcon, TicketRound } from 'voidfarm-toolkit'
 import useI18n from 'hooks/useI18n'
 import { DataResponse } from 'utils/getLotteryRoundData'
 import LotteryCardHeading from '../LotteryCardHeading'
@@ -32,6 +32,7 @@ const PastRoundCardDetails: React.FC<PastRoundCardDetailsProps> = ({ data }) => 
     lotteryDate,
     lotteryNumber,
     lotteryNumbers,
+    match1Ticket,
     match2Ticket,
     match3Ticket,
     poolSize,
@@ -65,6 +66,7 @@ const PastRoundCardDetails: React.FC<PastRoundCardDetailsProps> = ({ data }) => 
           <PrizeGrid
             lotteryPrizeAmount={poolSize}
             jackpotMatches={jackpotTicket}
+            oneTicketMatches={match1Ticket}
             twoTicketMatches={match2Ticket}
             threeTicketMatches={match3Ticket}
             pastDraw

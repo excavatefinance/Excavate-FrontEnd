@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import CountUp from 'react-countup'
-import styled from 'styled-components'
-import { Text } from '@pancakeswap-libs/uikit'
+import { Text } from 'voidfarm-toolkit'
 
 interface TextProps {
   isDisabled?: boolean
@@ -13,13 +12,10 @@ interface BalanceProps extends TextProps {
   value?: number
   decimals?: number
   unit?: string
+  reverse?: boolean
 }
 
-const StyledText = styled(Text)<TextProps>`
-  color: ${({ isDisabled, color, theme }) => (isDisabled ? theme.colors.textDisabled : color)};
-`
-
-const Balance: React.FC<BalanceProps> = ({ value, fontSize, color, decimals, isDisabled, unit }) => {
+const Balance: React.FC<BalanceProps> = ({ value, fontSize, color, decimals, isDisabled, unit, reverse = false }) => {
   const previousValue = useRef(0)
 
   useEffect(() => {
@@ -27,10 +23,17 @@ const Balance: React.FC<BalanceProps> = ({ value, fontSize, color, decimals, isD
   }, [value])
 
   return (
-    <StyledText bold color={color} fontSize={fontSize} isDisabled={isDisabled}>
+    <Text bold color={isDisabled ? 'textDisabled' : color} fontSize={fontSize}>
+      {reverse && value && unit
+          ? <span>{unit}</span>
+          : ''
+      }
       <CountUp start={previousValue.current} end={value} decimals={decimals} duration={1} separator="," />
-      {value && unit && <span>{unit}</span>}
-    </StyledText>
+      {!reverse && value && unit
+          ? <span>{unit}</span>
+          : ''
+      }
+    </Text>
   )
 }
 

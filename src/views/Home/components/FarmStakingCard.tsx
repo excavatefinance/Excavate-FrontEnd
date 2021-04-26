@@ -1,37 +1,24 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { Heading, Card, CardBody, Button } from '@pancakeswap-libs/uikit'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
-import BigNumber from 'bignumber.js'
+import { Heading, Card, CardBody, Button } from 'voidfarm-toolkit'
+import { useWeb3React } from '@web3-react/core'
 import useI18n from 'hooks/useI18n'
 import { useAllHarvest } from 'hooks/useHarvest'
 import useFarmsWithBalance from 'hooks/useFarmsWithBalance'
 import UnlockButton from 'components/UnlockButton'
 import CakeHarvestBalance from './CakeHarvestBalance'
 import CakeWalletBalance from './CakeWalletBalance'
-import { usePriceCakeBusd } from '../../../state/hooks'
-import useTokenBalance from '../../../hooks/useTokenBalance'
-import { getCakeAddress } from '../../../utils/addressHelpers'
-import useAllEarnings from '../../../hooks/useAllEarnings'
-import { getBalanceNumber } from '../../../utils/formatBalance'
 
 const StyledFarmStakingCard = styled(Card)`
+
 `
-const CardWrapper = styled.div`
-  
-`
+
 const Block = styled.div`
   margin-bottom: 16px;
 `
 
-
-const CardImage = styled.div`
+const CardImage = styled.img`
   margin-bottom: 16px;
-  background-image: url(/images/axe/mine_cart_day.svg);
-  background-position: center;
-  background-size: contain;
-  height: 64px;
-  width: 64px;
 `
 
 const Label = styled.div`
@@ -45,15 +32,9 @@ const Actions = styled.div`
 
 const FarmedStakingCard = () => {
   const [pendingTx, setPendingTx] = useState(false)
-  const { account } = useWallet()
+  const { account } = useWeb3React()
   const TranslateString = useI18n()
   const farmsWithBalance = useFarmsWithBalance()
-  const cakeBalance = getBalanceNumber(useTokenBalance(getCakeAddress()))
-  const eggPrice = usePriceCakeBusd().toNumber()
-  const allEarnings = useAllEarnings()
-  const earningsSum = allEarnings.reduce((accum, earning) => {
-    return accum + new BigNumber(earning).div(new BigNumber(10).pow(18)).toNumber()
-  }, 0)
   const balancesWithValue = farmsWithBalance.filter((balanceType) => balanceType.balance.toNumber() > 0)
 
   const { onReward } = useAllHarvest(balancesWithValue.map((farmWithBalance) => farmWithBalance.pid))
@@ -71,21 +52,18 @@ const FarmedStakingCard = () => {
 
   return (
     <StyledFarmStakingCard>
-	  <CardWrapper className="smelt">	
       <CardBody>
         <Heading size="xl" mb="24px">
-          {TranslateString(542, 'Mines & Smelting')}
+          {TranslateString(542, 'Farms & Staking')}
         </Heading>
-        <CardImage className="mine__cart" />
+        <CardImage src="/images/tokens/void.png" alt="cake logo" width={128} height={128} />
         <Block>
-          <Label>{TranslateString(544, 'AXE to Harvest')}</Label>
-          <CakeHarvestBalance earningsSum={earningsSum}/>
-          <Label>~${(eggPrice * earningsSum).toFixed(2)}</Label>
+          <Label>{TranslateString(544, 'VOID to Harvest')}:</Label>
+          <CakeHarvestBalance />
         </Block>
         <Block>
-          <Label>{TranslateString(546, 'AXE in Wallet')}</Label>
-          <CakeWalletBalance cakeBalance={cakeBalance} />
-          <Label>~${(eggPrice * cakeBalance).toFixed(2)}</Label>
+          <Label>{TranslateString(546, 'VOID in Wallet')}:</Label>
+          <CakeWalletBalance />
         </Block>
         <Actions>
           {account ? (
@@ -93,18 +71,19 @@ const FarmedStakingCard = () => {
               id="harvest-all"
               disabled={balancesWithValue.length <= 0 || pendingTx}
               onClick={harvestAllFarms}
-              fullWidth
+              width="100%"
             >
               {pendingTx
-                ? TranslateString(548, 'Collecting AXE')
-                : TranslateString(999, `Harvest all (${balancesWithValue.length})`)}
+                ? TranslateString(548, 'Collecting VOID')
+                : TranslateString(532, `Harvest all (${balancesWithValue.length})`, {
+                    count: balancesWithValue.length,
+                  })}
             </Button>
           ) : (
-            <UnlockButton fullWidth />
+            <UnlockButton width="100%" />
           )}
         </Actions>
       </CardBody>
-	  </CardWrapper>
     </StyledFarmStakingCard>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Text, Input, Button } from '@pancakeswap-libs/uikit'
+import { Text, Input, Button } from 'voidfarm-toolkit'
 import useI18n from 'hooks/useI18n'
 
 interface PastLotterySearcherProps {
@@ -14,6 +14,17 @@ const Wrapper = styled.div`
 
 const SearchWrapper = styled.div`
   position: relative;
+`
+const InputWrapper = styled.div`
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
 `
 
 const ButtonWrapper = styled.div`
@@ -45,19 +56,21 @@ const PastLotterySearcher: React.FC<PastLotterySearcherProps> = ({ initialLotter
 
   return (
     <Wrapper>
-      <Text>{TranslateString(999, 'Select lottery number:')}</Text>
+      <Text>{TranslateString(742, 'Select lottery number:')}</Text>
       <form onSubmit={handleSubmit}>
         <SearchWrapper>
-          <Input
-            value={lotteryNumber}
-            type="number"
-            isWarning={isError}
-            max={initialLotteryNumber}
-            onChange={handleChange}
-          />
+          <InputWrapper>
+            <Input
+              value={lotteryNumber}
+              type="number"
+              isWarning={isError}
+              max={initialLotteryNumber}
+              onChange={handleChange}
+            />
+          </InputWrapper>
           <ButtonWrapper>
-            <Button type="submit" size="sm" disabled={isError}>
-              {TranslateString(999, 'Search')}
+            <Button type="submit" scale="sm" disabled={isError}>
+              {TranslateString(744, 'Search')}
             </Button>
           </ButtonWrapper>
         </SearchWrapper>

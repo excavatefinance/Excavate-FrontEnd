@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, Text } from '@pancakeswap-libs/uikit'
+import { Heading, Text } from 'voidfarm-toolkit'
 import Container from 'components/layout/Container'
 import useI18n from 'hooks/useI18n'
 
@@ -16,7 +16,7 @@ const Blurb = styled(Text)`
 `
 
 const StyledHero = styled.div`
-  background-image: linear-gradient(180deg, #53dee9 0%, #1fc7d4 100%);
+  background-image: linear-gradient(180deg, #53dee9 0%, #b4b6b8 100%);
   padding-bottom: 40px;
   padding-top: 40px;
   margin-bottom: 32px;

@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { Heading, Card, CardBody, Button, useModal } from '@pancakeswap-libs/uikit'
+import { Heading, Card, CardBody, Button, useModal } from 'voidfarm-toolkit'
+import { useWeb3React } from '@web3-react/core'
 import { getCakeAddress } from 'utils/addressHelpers'
 import { getBalanceNumber } from 'utils/formatBalance'
 import useI18n from 'hooks/useI18n'
@@ -9,6 +10,10 @@ import useTokenBalance from 'hooks/useTokenBalance'
 import { useMultiClaimLottery } from 'hooks/useBuyLottery'
 import { useTotalClaim } from 'hooks/useTickets'
 import BuyModal from 'views/Lottery/components/TicketCard/BuyTicketModal'
+import { useLotteryAllowance } from 'hooks/useAllowance'
+import { useApproval } from 'hooks/useApproval'
+import PurchaseWarningModal from 'views/Lottery/components/TicketCard/PurchaseWarningModal'
+import UnlockButton from 'components/UnlockButton'
 import CakeWinnings from './CakeWinnings'
 import LotteryJackpot from './LotteryJackpot'
 
@@ -40,13 +45,17 @@ const Actions = styled.div`
   }
 `
 
-const FarmedStakingCard = () => {
+const LotteryCard = () => {
+  const { account } = useWeb3React()
   const lotteryHasDrawn = useGetLotteryHasDrawn()
   const [requesteClaim, setRequestedClaim] = useState(false)
   const TranslateString = useI18n()
+  const allowance = useLotteryAllowance()
+  const [onPresentApprove] = useModal(<PurchaseWarningModal />)
   const { claimAmount } = useTotalClaim()
   const { onMultiClaim } = useMultiClaimLottery()
   const cakeBalance = useTokenBalance(getCakeAddress())
+  const { handleApprove, requestedApproval } = useApproval(onPresentApprove)
 
   const handleClaim = useCallback(async () => {
     try {
@@ -61,6 +70,21 @@ const FarmedStakingCard = () => {
     }
   }, [onMultiClaim, setRequestedClaim])
 
+  const renderLotteryTicketButtonBuyOrApprove = () => {
+    if (!allowance.toNumber()) {
+      return (
+        <Button width="100%" disabled={requestedApproval} onClick={handleApprove}>
+          {TranslateString(494, 'Approve CAKE')}
+        </Button>
+      )
+    }
+    return (
+      <Button id="dashboard-buy-tickets" variant="secondary" onClick={onPresentBuy} disabled={lotteryHasDrawn}>
+        {TranslateString(558, 'Buy Tickets')}
+      </Button>
+    )
+  }
+
   const [onPresentBuy] = useModal(<BuyModal max={cakeBalance} tokenName="CAKE" />)
 
   return (
@@ -71,29 +95,33 @@ const FarmedStakingCard = () => {
         </Heading>
         <CardImage src="/images/ticket.svg" alt="cake logo" width={64} height={64} />
         <Block>
+          <Label>{TranslateString(552, 'VOID to Collect')}:</Label>
           <CakeWinnings />
-          <Label>{TranslateString(552, 'CAKE to Collect')}</Label>
         </Block>
         <Block>
+          <Label>{TranslateString(554, 'Total jackpot this round')}:</Label>
           <LotteryJackpot />
-          <Label>{TranslateString(554, 'Total jackpot this round')}</Label>
         </Block>
-        <Actions>
-          <Button
-            id="dashboard-collect-winnings"
-            disabled={getBalanceNumber(claimAmount) === 0 || requesteClaim}
-            onClick={handleClaim}
-            style={{ marginRight: '8px' }}
-          >
-            {TranslateString(556, 'Collect Winnings')}
-          </Button>
-          <Button id="dashboard-buy-tickets" variant="secondary" onClick={onPresentBuy} disabled={lotteryHasDrawn}>
-            {TranslateString(558, 'Buy Tickets')}
-          </Button>
-        </Actions>
+        {account ? (
+          <Actions>
+            <Button
+              id="dashboard-collect-winnings"
+              disabled={getBalanceNumber(claimAmount) === 0 || requesteClaim}
+              onClick={handleClaim}
+              style={{ marginRight: '8px' }}
+            >
+              {TranslateString(556, 'Collect Winnings')}
+            </Button>
+            {renderLotteryTicketButtonBuyOrApprove()}
+          </Actions>
+        ) : (
+          <Actions>
+            <UnlockButton width="100%" />
+          </Actions>
+        )}
       </CardBody>
     </StyledLotteryCard>
   )
 }
 
-export default FarmedStakingCard
+export default LotteryCard

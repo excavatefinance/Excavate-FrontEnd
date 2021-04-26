@@ -1,8 +1,8 @@
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useMemo, useState } from 'react'
-import { Button, Modal } from '@pancakeswap-libs/uikit'
+import { Button, Modal, LinkExternal } from 'voidfarm-toolkit'
 import ModalActions from 'components/ModalActions'
-import TokenInput from 'components/TokenInput'
+import ModalInput from 'components/ModalInput'
 import useI18n from 'hooks/useI18n'
 import { getFullDisplayBalance } from 'utils/formatBalance'
 
@@ -11,17 +11,18 @@ interface DepositModalProps {
   onConfirm: (amount: string) => void
   onDismiss?: () => void
   tokenName?: string
+  addLiquidityUrl?: string
   depositFeeBP?: number
+
 }
 
-const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, tokenName = '' , depositFeeBP = 0}) => {
+const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, tokenName = '', addLiquidityUrl,depositFeeBP = 0 }) => {
   const [val, setVal] = useState('')
   const [pendingTx, setPendingTx] = useState(false)
   const TranslateString = useI18n()
   const fullBalance = useMemo(() => {
     return getFullDisplayBalance(max)
   }, [max])
-
   const handleChange = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
       setVal(e.currentTarget.value)
@@ -34,21 +35,24 @@ const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, 
   }, [fullBalance, setVal])
 
   return (
-    <Modal title={`${TranslateString(316, 'Deposit')} ${tokenName} Tokens`} onDismiss={onDismiss}>
-      <TokenInput
+    <Modal title={TranslateString(1068, 'Stake LP tokens')} onDismiss={onDismiss}>
+      <ModalInput
         value={val}
         onSelectMax={handleSelectMax}
         onChange={handleChange}
         max={fullBalance}
         symbol={tokenName}
+        addLiquidityUrl={addLiquidityUrl}
+        inputTitle={TranslateString(1070, 'Stake')}
         depositFeeBP={depositFeeBP}
       />
       <ModalActions>
-        <Button variant="secondary" onClick={onDismiss}>
+        <Button variant="secondary" onClick={onDismiss} width="100%">
           {TranslateString(462, 'Cancel')}
         </Button>
         <Button
-          disabled={pendingTx}
+          width="100%"
+          disabled={pendingTx || fullBalance === '0' || val === '0'}
           onClick={async () => {
             setPendingTx(true)
             await onConfirm(val)
@@ -59,6 +63,9 @@ const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, 
           {pendingTx ? TranslateString(488, 'Pending Confirmation') : TranslateString(464, 'Confirm')}
         </Button>
       </ModalActions>
+      <LinkExternal href={addLiquidityUrl} style={{ alignSelf: 'center' }}>
+        {TranslateString(999, 'Get')} {tokenName}
+      </LinkExternal>
     </Modal>
   )
 }
