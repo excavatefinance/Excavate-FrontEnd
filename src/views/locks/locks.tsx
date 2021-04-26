@@ -1,5 +1,4 @@
-const myHTML = `<h1>John Doe</h1>`;
 
-const lock = () => <div>{myHTML}</div>;
-
+var lock = require('html-react-parser');
+lock('<div>text</div>');
 export default lock;
