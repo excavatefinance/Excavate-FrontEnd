@@ -33,7 +33,7 @@ const Locks: React.FC<FarmsProps> = (farmsProps) => {
       </Heading>
       <div>
        
-        <FlexLayout>>
+        <FlexLayout>
         </FlexLayout>
       </div>
       <Image src="/images/egg/8.png" alt="illustration" width={1352} height={587} responsive />
