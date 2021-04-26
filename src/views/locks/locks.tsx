@@ -41,4 +41,4 @@ const Locks: React.FC<FarmsProps> = (farmsProps) => {
   )
 }
 
-export defaultLockss
+export default Locks
