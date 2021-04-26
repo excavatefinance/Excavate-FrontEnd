@@ -1,27 +1,28 @@
 import { useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
-import { useWeb3React } from '@web3-react/core'
-import { getBep20Contract, getCakeContract } from 'utils/contractHelpers'
-import useWeb3 from './useWeb3'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
+import { provider } from 'web3-core'
+import cakeABI from 'config/abi/cake.json'
+import { getContract } from 'utils/web3'
+import { getTokenBalance } from 'utils/erc20'
+import { getCakeAddress } from 'utils/addressHelpers'
 import useRefresh from './useRefresh'
 
 const useTokenBalance = (tokenAddress: string) => {
   const [balance, setBalance] = useState(new BigNumber(0))
-  const { account } = useWeb3React()
-  const web3 = useWeb3()
+  const { account, ethereum }: { account: string; ethereum: provider } = useWallet()
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
     const fetchBalance = async () => {
-      const contract = getBep20Contract(tokenAddress, web3)
-      const res = await contract.methods.balanceOf(account).call()
+      const res = await getTokenBalance(ethereum, tokenAddress, account)
       setBalance(new BigNumber(res))
     }
 
-    if (account) {
+    if (account && ethereum) {
       fetchBalance()
     }
-  }, [account, tokenAddress, web3, fastRefresh])
+  }, [account, ethereum, tokenAddress, fastRefresh])
 
   return balance
 }
@@ -32,7 +33,7 @@ export const useTotalSupply = () => {
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const cakeContract = getCakeContract()
+      const cakeContract = getContract(cakeABI, getCakeAddress())
       const supply = await cakeContract.methods.totalSupply().call()
       setTotalSupply(new BigNumber(supply))
     }
@@ -46,17 +47,16 @@ export const useTotalSupply = () => {
 export const useBurnedBalance = (tokenAddress: string) => {
   const [balance, setBalance] = useState(new BigNumber(0))
   const { slowRefresh } = useRefresh()
-  const web3 = useWeb3()
 
   useEffect(() => {
     const fetchBalance = async () => {
-      const contract = getBep20Contract(tokenAddress, web3)
-      const res = await contract.methods.balanceOf('0x000000000000000000000000000000000000dEaD').call()
-      setBalance(new BigNumber(res))
+      const cakeContract = getContract(cakeABI, getCakeAddress())
+      const bal = await cakeContract.methods.balanceOf('0x000000000000000000000000000000000000dEaD').call()
+      setBalance(new BigNumber(bal))
     }
 
     fetchBalance()
-  }, [web3, tokenAddress, slowRefresh])
+  }, [tokenAddress, slowRefresh])
 
   return balance
 }

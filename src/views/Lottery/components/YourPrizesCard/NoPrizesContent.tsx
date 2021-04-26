@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Text, Button, useModal } from 'voidfarm-toolkit'
+import { Text, Button, useModal } from '@pancakeswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 import useTickets from 'hooks/useTickets'
 import MyTicketsModal from '../TicketCard/UserTicketsModal'
@@ -39,7 +39,7 @@ const NoPrizesContent: React.FC = () => {
     <Wrapper>
       <Image src="/images/no-prize.svg" alt="no prizes won" />
       <TextWrapper>
-        <StyledText color="textDisabled">{TranslateString(726, 'Sorry, no prizes to collect')}</StyledText>
+        <StyledText color="textDisabled">{TranslateString(999, 'Sorry, no prizes to collect')}</StyledText>
         <StyledButton variant="text" onClick={onPresentMyTickets}>
           {TranslateString(432, 'View your tickets')}
         </StyledButton>

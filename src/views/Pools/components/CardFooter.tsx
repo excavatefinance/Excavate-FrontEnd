@@ -4,13 +4,9 @@ import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
 import useI18n from 'hooks/useI18n'
 import { ChevronDown, ChevronUp } from 'react-feather'
-import { Flex, MetamaskIcon } from 'voidfarm-toolkit'
 import Balance from 'components/Balance'
 import { CommunityTag, CoreTag, BinanceTag } from 'components/Tags'
-import {useBlock, useGetApiPrices} from 'state/hooks'
 import { PoolCategory } from 'config/constants/types'
-import { registerToken } from 'utils/wallet'
-import { BASE_URL } from 'config'
 
 const tags = {
   [PoolCategory.BINANCE]: BinanceTag,
@@ -20,17 +16,11 @@ const tags = {
 
 interface Props {
   projectLink: string
-  decimals: number
   totalStaked: BigNumber
-  tokenName: string
-  tokenAddress: string
-  tokenDecimals: number
-  startBlock: number
-  endBlock: number
+  blocksRemaining: number
   isFinished: boolean
+  blocksUntilStart: number
   poolCategory: PoolCategory
-  stakingTokenPrice: number
-  rewardTokenPrice: number
 }
 
 const StyledFooter = styled.div<{ isFinished: boolean }>`
@@ -65,8 +55,9 @@ const Details = styled.div`
   margin-top: 24px;
 `
 
-const Row = styled(Flex)`
+const Row = styled.div`
   align-items: center;
+  display: flex;
 `
 
 const FlexFull = styled.div`
@@ -78,40 +69,23 @@ const Label = styled.div`
 const TokenLink = styled.a`
   font-size: 14px;
   text-decoration: none;
-  color: ${(props) => props.theme.colors.primary};
-  cursor: pointer;
+  color: #12aab5;
 `
 
 const CardFooter: React.FC<Props> = ({
   projectLink,
-  decimals,
-  tokenAddress,
   totalStaked,
-  tokenName,
-  tokenDecimals,
+  blocksRemaining,
   isFinished,
-  startBlock,
-  endBlock,
+  blocksUntilStart,
   poolCategory,
-  stakingTokenPrice,
-  rewardTokenPrice
 }) => {
-  const { currentBlock } = useBlock()
   const [isOpen, setIsOpen] = useState(false)
   const TranslateString = useI18n()
   const Icon = isOpen ? ChevronUp : ChevronDown
 
   const handleClick = () => setIsOpen(!isOpen)
   const Tag = tags[poolCategory]
-
-  const blocksUntilStart = Math.max(startBlock - currentBlock, 0)
-  const blocksRemaining = Math.max(endBlock - currentBlock, 0)
-
-  const imageSrc = `${BASE_URL}/images/tokens/${tokenName.toLowerCase()}.png`
-
-  const totalLiquidity = new BigNumber(getBalanceNumber(totalStaked, decimals)).times(rewardTokenPrice)
-
-  const totalLiquidityUnitReverse = true
 
   return (
     <StyledFooter isFinished={isFinished}>
@@ -120,56 +94,37 @@ const CardFooter: React.FC<Props> = ({
           <Tag />
         </FlexFull>
         <StyledDetailsButton onClick={handleClick}>
-          {isOpen ? TranslateString(1066, 'Hide') : TranslateString(658, 'Details')} <Icon />
+          {isOpen ? 'Hide' : 'Details'} <Icon />
         </StyledDetailsButton>
       </Row>
       {isOpen && (
         <Details>
-          <Row mb="4px">
+          <Row style={{ marginBottom: '4px' }}>
             <FlexFull>
               <Label>
                 <span role="img" aria-label="syrup">
-                  {' '}
+                  🥞{' '}
                 </span>
                 {TranslateString(408, 'Total')}
               </Label>
             </FlexFull>
-            <Balance fontSize="14px" isDisabled={isFinished} value={getBalanceNumber(totalStaked, decimals)} />
-          </Row>
-          <Row mb="4px">
-            <FlexFull>
-              <Label>
-                <span role="img" aria-label="syrup">
-                  {' '}
-                </span>
-                {TranslateString(408, 'Total Liquidity')}
-              </Label>
-            </FlexFull>
-            <Balance fontSize="14px" isDisabled={isFinished} value={totalLiquidity.toNumber()} unit="$" reverse={totalLiquidityUnitReverse} />
+            <Balance fontSize="14px" isDisabled={isFinished} value={getBalanceNumber(totalStaked)} />
           </Row>
           {blocksUntilStart > 0 && (
-            <Row mb="4px">
+            <Row>
               <FlexFull>
-                <Label>{TranslateString(1212, 'Start')}:</Label>
+                <Label>{TranslateString(410, 'Start')}:</Label>
               </FlexFull>
               <Balance fontSize="14px" isDisabled={isFinished} value={blocksUntilStart} decimals={0} />
             </Row>
           )}
           {blocksUntilStart === 0 && blocksRemaining > 0 && (
-            <Row mb="4px">
+            <Row>
               <FlexFull>
                 <Label>{TranslateString(410, 'End')}:</Label>
               </FlexFull>
               <Balance fontSize="14px" isDisabled={isFinished} value={blocksRemaining} decimals={0} />
             </Row>
-          )}
-          {tokenAddress && (
-            <Flex mb="4px">
-              <TokenLink onClick={() => registerToken(tokenAddress, tokenName, tokenDecimals, imageSrc)}>
-                Add {tokenName} to Metamask
-              </TokenLink>
-              <MetamaskIcon height={15} width={15} ml="4px" />
-            </Flex>
           )}
           <TokenLink href={projectLink} target="_blank">
             {TranslateString(412, 'View project site')}

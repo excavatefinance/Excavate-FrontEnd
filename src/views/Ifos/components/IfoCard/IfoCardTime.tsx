@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Flex, Link } from 'voidfarm-toolkit'
+import { Link, Text } from '@pancakeswap-libs/uikit'
 import { IfoStatus } from 'config/constants/types'
 import getTimePeriods from 'utils/getTimePeriods'
 import useI18n from 'hooks/useI18n'
 
 export interface IfoCardTimeProps {
+  isLoading: boolean
   status: IfoStatus
   secondsUntilStart: number
   secondsUntilEnd: number
@@ -27,17 +28,21 @@ const Countdown = styled.div`
   text-align: center;
 `
 
-const IfoCardTime: React.FC<IfoCardTimeProps> = ({ status, secondsUntilStart, secondsUntilEnd, block }) => {
+const IfoCardTime: React.FC<IfoCardTimeProps> = ({ isLoading, status, secondsUntilStart, secondsUntilEnd, block }) => {
   const TranslateString = useI18n()
   const countdownToUse = status === 'coming_soon' ? secondsUntilStart : secondsUntilEnd
   const timeUntil = getTimePeriods(countdownToUse)
   const suffix = status === 'coming_soon' ? 'start' : 'finish'
 
-  if (status === 'idle') {
+  if (isLoading) {
+    return <Details>{TranslateString(656, 'Loading...')}</Details>
+  }
+
+  if (countdownToUse <= 0) {
     return (
-      <Flex alignItems="center" justifyContent="center" mb="24px" height="24px">
-        {TranslateString(656, 'Loading...')}
-      </Flex>
+      <Details>
+        <Text bold>{TranslateString(999, 'Finished!')}</Text>
+      </Details>
     )
   }
 

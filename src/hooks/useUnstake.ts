@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { useWeb3React } from '@web3-react/core'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { useDispatch } from 'react-redux'
 import {
   fetchFarmUserDataAsync,
@@ -12,7 +12,7 @@ import { useMasterchef, useSousChef } from './useContract'
 
 const useUnstake = (pid: number) => {
   const dispatch = useDispatch()
-  const { account } = useWeb3React()
+  const { account } = useWallet()
   const masterChefContract = useMasterchef()
 
   const handleUnstake = useCallback(
@@ -27,17 +27,17 @@ const useUnstake = (pid: number) => {
   return { onUnstake: handleUnstake }
 }
 
-const SYRUPIDS = [5, 6, 3, 1, 22, 23, 78]
+const SYRUPIDS = [5, 6, 3, 1, 22, 23]
 
 export const useSousUnstake = (sousId) => {
   const dispatch = useDispatch()
-  const { account } = useWeb3React()
+  const { account } = useWallet()
   const masterChefContract = useMasterchef()
   const sousChefContract = useSousChef(sousId)
   const isOldSyrup = SYRUPIDS.includes(sousId)
 
   const handleUnstake = useCallback(
-    async (amount: string, decimals: number) => {
+    async (amount: string) => {
       if (sousId === 0) {
         const txHash = await unstake(masterChefContract, 0, amount, account)
         console.info(txHash)
@@ -45,7 +45,7 @@ export const useSousUnstake = (sousId) => {
         const txHash = await sousEmegencyUnstake(sousChefContract, amount, account)
         console.info(txHash)
       } else {
-        const txHash = await sousUnstake(sousChefContract, amount, decimals, account)
+        const txHash = await sousUnstake(sousChefContract, amount, account)
         console.info(txHash)
       }
       dispatch(updateUserStakedBalance(sousId, account))

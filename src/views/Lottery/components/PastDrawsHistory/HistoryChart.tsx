@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useContext } from 'react'
 import styled from 'styled-components'
-import { Text } from 'voidfarm-toolkit'
+import { Text } from '@pancakeswap-libs/uikit'
 import PastLotteryDataContext from 'contexts/PastLotteryDataContext'
 import Loading from '../Loading'
 
@@ -47,7 +47,7 @@ const HistoryChart: React.FC = () => {
         label: 'Burned',
         data: getDataArray('burned'),
         yAxisID: 'y-axis-burned',
-        ...lineStyles({ color: '#b4b6b8' }),
+        ...lineStyles({ color: '#1FC7D4' }),
       },
     ],
   }
@@ -80,19 +80,19 @@ const HistoryChart: React.FC = () => {
           display: true,
           position: 'left',
           id: 'y-axis-pool',
-          ...axesStyles({ color: '#751113', lineHeight: 1.6 }),
+          ...axesStyles({ color: '#8f80ba', lineHeight: 1.6 }),
         },
         {
           type: 'linear',
           display: true,
           position: 'right',
           id: 'y-axis-burned',
-          ...axesStyles({ color: '#b4b6b8', lineHeight: 1.5 }),
+          ...axesStyles({ color: '#1FC7D4', lineHeight: 1.5 }),
         },
       ],
       xAxes: [
         {
-          ...axesStyles({ color: '#751113', lineHeight: 1 }),
+          ...axesStyles({ color: '#452A7A', lineHeight: 1 }),
         },
       ],
     },

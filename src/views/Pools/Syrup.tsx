@@ -1,13 +1,17 @@
-import React, { useState, useMemo } from 'react'
+import React from 'react'
 import { Route, useRouteMatch } from 'react-router-dom'
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
-import { useWeb3React } from '@web3-react/core'
-import { Heading } from 'voidfarm-toolkit'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
+import { Heading } from '@pancakeswap-libs/uikit'
+import { BLOCKS_PER_YEAR } from 'config'
 import orderBy from 'lodash/orderBy'
 import partition from 'lodash/partition'
 import useI18n from 'hooks/useI18n'
-import { usePools, useBlock } from 'state/hooks'
+import useBlock from 'hooks/useBlock'
+import { getBalanceNumber } from 'utils/formatBalance'
+import { useFarms, usePriceBnbBusd, usePools } from 'state/hooks'
+import { QuoteToken, PoolCategory } from 'config/constants/types'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
 import Coming from './components/Coming'
@@ -18,44 +22,73 @@ import Divider from './components/Divider'
 const Farm: React.FC = () => {
   const { path } = useRouteMatch()
   const TranslateString = useI18n()
-  const { account } = useWeb3React()
+  const { account } = useWallet()
+  const farms = useFarms()
   const pools = usePools(account)
-  const { currentBlock } = useBlock()
-  const [stackedOnly, setStackedOnly] = useState(false)
+  const bnbPriceUSD = usePriceBnbBusd()
+  const block = useBlock()
 
-  const [finishedPools, openPools] = useMemo(
-    () => partition(pools, (pool) => pool.isFinished || currentBlock > pool.endBlock),
-    [currentBlock, pools],
-  )
-  const stackedOnlyPools = useMemo(
-    () => openPools.filter((pool) => pool.userData && new BigNumber(pool.userData.stakedBalance).isGreaterThan(0)),
-    [openPools],
-  )
+  const priceToBnb = (tokenName: string, tokenPrice: BigNumber, quoteToken: QuoteToken): BigNumber => {
+    const tokenPriceBN = new BigNumber(tokenPrice)
+    if (tokenName === 'BNB') {
+      return new BigNumber(1)
+    }
+    if (tokenPrice && quoteToken === QuoteToken.BUSD) {
+      return tokenPriceBN.div(bnbPriceUSD)
+    }
+    return tokenPriceBN
+  }
 
+  const poolsWithApy = pools.map((pool) => {
+    const isBnbPool = pool.poolCategory === PoolCategory.BINANCE
+    const rewardTokenFarm = farms.find((f) => f.tokenSymbol === pool.tokenName)
+    const stakingTokenFarm = farms.find((s) => s.tokenSymbol === pool.stakingTokenName)
+
+    // /!\ Assume that the farm quote price is BNB
+    const stakingTokenPriceInBNB = isBnbPool ? new BigNumber(1) : new BigNumber(stakingTokenFarm?.tokenPriceVsQuote)
+    const rewardTokenPriceInBNB = priceToBnb(
+      pool.tokenName,
+      rewardTokenFarm?.tokenPriceVsQuote,
+      rewardTokenFarm?.quoteTokenSymbol,
+    )
+
+    const totalRewardPricePerYear = rewardTokenPriceInBNB.times(pool.tokenPerBlock).times(BLOCKS_PER_YEAR)
+    const totalStakingTokenInPool = stakingTokenPriceInBNB.times(getBalanceNumber(pool.totalStaked))
+    const apy = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100)
+
+    return {
+      ...pool,
+      isFinished: pool.sousId === 0 ? false : pool.isFinished || block > pool.endBlock,
+      apy,
+    }
+  })
+
+  const [finishedPools, openPools] = partition(poolsWithApy, (pool) => pool.isFinished)
 
   return (
     <Page>
       <Hero>
         <div>
           <Heading as="h1" size="xxl" mb="16px">
-            {TranslateString(738, 'VOID Pool')}
+            {TranslateString(282, 'SYRUP Pool')}
           </Heading>
           <ul>
-            <li>{TranslateString(580, 'Stake VOID to earn new tokens.')}</li>
-            <li>{TranslateString(486, 'You can unstake at any time.')}</li>
+            <li>{TranslateString(580, 'Stake CAKE to earn new tokens.')}</li>
+            <li>{TranslateString(404, 'You can unstake at any time.')}</li>
             <li>{TranslateString(406, 'Rewards are calculated per block.')}</li>
           </ul>
         </div>
-        <img src="/images/mozart-sleeping.png" alt="VOID icon" width={410} height={191} />
+        <img src="/images/syrup.png" alt="SYRUP POOL icon" width={410} height={191} />
       </Hero>
-      <PoolTabButtons stackedOnly={stackedOnly} setStackedOnly={setStackedOnly} />
+      <PoolTabButtons />
       <Divider />
       <FlexLayout>
         <Route exact path={`${path}`}>
           <>
-            {stackedOnly
-              ? orderBy(stackedOnlyPools, ['sortOrder']).map((pool) => <PoolCard key={pool.sousId} pool={pool} />)
-              : orderBy(openPools, ['sortOrder']).map((pool) => <PoolCard key={pool.sousId} pool={pool} />)}
+            {orderBy(openPools, ['sortOrder']).map((pool) => (
+              <PoolCard key={pool.sousId} pool={pool} />
+            ))}
+            <Coming />
           </>
         </Route>
         <Route path={`${path}/history`}>

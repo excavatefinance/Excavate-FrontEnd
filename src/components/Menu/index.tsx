@@ -1,33 +1,31 @@
 import React, { useContext } from 'react'
-import { Menu as UikitMenu } from 'voidfarm-toolkit'
-import { useWeb3React } from '@web3-react/core'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { allLanguages } from 'config/localisation/languageCodes'
 import { LanguageContext } from 'contexts/Localisation/languageContext'
 import useTheme from 'hooks/useTheme'
-import useAuth from 'hooks/useAuth'
-import { usePriceCakeBusd, useProfile } from 'state/hooks'
+import { usePriceCakeBusd } from 'state/hooks'
+import { Menu as UikitMenu } from '@pancakeswap-libs/uikit'
 import config from './config'
 
 const Menu = (props) => {
-  const { account } = useWeb3React()
-  const { login, logout } = useAuth()
+  const { account, connect, reset } = useWallet()
   const { selectedLanguage, setSelectedLanguage } = useContext(LanguageContext)
   const { isDark, toggleTheme } = useTheme()
   const cakePriceUsd = usePriceCakeBusd()
-  const { profile } = useProfile()
 
   return (
     <UikitMenu
       account={account}
-      login={login}
-      logout={logout}
+      login={connect}
+      logout={reset}
       isDark={isDark}
-      toggleTheme={toggleTheme}
+	  toggleTheme={toggleTheme}
       currentLang={selectedLanguage && selectedLanguage.code}
       langs={allLanguages}
       setLang={setSelectedLanguage}
       cakePriceUsd={cakePriceUsd.toNumber()}
       links={config}
+      priceLink="https://www.coingecko.com/en/coins/need-to-change"
       {...props}
     />
   )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text } from 'voidfarm-toolkit'
+import { Text } from '@pancakeswap-libs/uikit'
 
 interface PastRoundCardErrorProps {
   error: {

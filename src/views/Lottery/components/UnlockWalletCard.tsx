@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, Card, CardBody, Ticket } from 'voidfarm-toolkit'
+import { Heading, Card, CardBody, Ticket } from '@pancakeswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 import UnlockButton from 'components/UnlockButton'
 
@@ -31,7 +31,7 @@ const UnlockWalletCard = () => {
         <IconWrapper>
           <Ticket />
         </IconWrapper>
-        <StyledHeading size="md">{TranslateString(1080, 'Unlock wallet to access lottery')}</StyledHeading>
+        <StyledHeading size="md">{TranslateString(999, 'Unlock wallet to access lottery')}</StyledHeading>
         <UnlockButton />
       </StyledCardBody>
     </Card>

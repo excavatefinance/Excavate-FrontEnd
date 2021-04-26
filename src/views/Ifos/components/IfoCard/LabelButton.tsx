@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { Button, Text } from 'voidfarm-toolkit'
+import { Button, Text } from '@pancakeswap-libs/uikit'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   value: string

@@ -1,15 +1,20 @@
 import React from 'react'
-import { Box, Progress } from 'voidfarm-toolkit'
+import styled from 'styled-components'
+import { Progress } from '@pancakeswap-libs/uikit'
 
 interface IfoCardProgressProps {
   progress: number
 }
 
+const StyledProgress = styled.div`
+  margin-bottom: 16px;
+`
+
 const IfoCardProgress: React.FC<IfoCardProgressProps> = ({ progress }) => {
   return (
-    <Box mb="16px">
+    <StyledProgress>
       <Progress primaryStep={progress} />
-    </Box>
+    </StyledProgress>
   )
 }
 

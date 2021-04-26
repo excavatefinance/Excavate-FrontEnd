@@ -1,34 +1,34 @@
 import React from 'react'
-import { Tag, VerifiedIcon, CommunityIcon, BinanceIcon } from 'voidfarm-toolkit'
+import { Tag, VerifiedIcon, CommunityIcon, BinanceIcon } from '@pancakeswap-libs/uikit'
 
-const CoreTag = (props) => (
-  <Tag variant="secondary" outline startIcon={<VerifiedIcon color="secondary" />} {...props}>
+const NoFeeTag = () => (
+  <Tag variant="success" outline startIcon={<VerifiedIcon />}>
+    No Fees
+  </Tag>
+)
+
+const RiskTag = ({ risk }) => (
+  <Tag variant={risk >= 3 ? 'failure' : 'success'} outline startIcon={<VerifiedIcon />}>
+    Risk {risk}
+  </Tag>
+)
+
+const CoreTag = () => (
+  <Tag variant='secondary' outline startIcon={<VerifiedIcon />}>
     Core
   </Tag>
 )
 
-const CommunityTag = (props) => (
-  <Tag variant="textSubtle" outline startIcon={<CommunityIcon color="secondary" />} {...props}>
+const CommunityTag = () => (
+  <Tag variant='textSubtle' outline startIcon={<CommunityIcon />}>
     Community
   </Tag>
 )
 
-const BinanceTag = (props) => (
-  <Tag variant="binance" outline startIcon={<BinanceIcon color="secondary" />} {...props}>
+const BinanceTag = () => (
+  <Tag variant='binance' outline startIcon={<BinanceIcon />}>
     Binance
   </Tag>
 )
 
-const DualTag = (props) => (
-  <Tag variant="textSubtle" outline {...props}>
-    Dual
-  </Tag>
-)
-
-const NoFeeTag = () => (
-    <Tag variant="success" outline startIcon={<VerifiedIcon />}>
-        No Fees
-    </Tag>
-)
-
-export { CoreTag, CommunityTag, BinanceTag, DualTag, NoFeeTag }
+export { CoreTag, CommunityTag, BinanceTag, RiskTag, NoFeeTag }

@@ -1,28 +1,40 @@
 import React from 'react'
 import BigNumber from 'bignumber.js'
-import { IconButton, useModal, CalculateIcon } from 'voidfarm-toolkit'
+import { CalculateIcon, IconButton, useModal } from '@pancakeswap-libs/uikit'
+import { Address } from 'config/constants/types'
 import ApyCalculatorModal from './ApyCalculatorModal'
 
 export interface ApyButtonProps {
   lpLabel?: string
   cakePrice?: BigNumber
-  apy?: number
-  addLiquidityUrl?: string
+  apy?: BigNumber
+  quoteTokenAdresses?: Address
+  quoteTokenSymbol?: string
+  tokenAddresses: Address
 }
 
-const ApyButton: React.FC<ApyButtonProps> = ({ lpLabel, cakePrice, apy, addLiquidityUrl }) => {
+const ApyButton: React.FC<ApyButtonProps> = ({
+  lpLabel,
+  quoteTokenAdresses,
+  quoteTokenSymbol,
+  tokenAddresses,
+  cakePrice,
+  apy,
+}) => {
   const [onPresentApyModal] = useModal(
-    <ApyCalculatorModal lpLabel={lpLabel} cakePrice={cakePrice} apy={apy} addLiquidityUrl={addLiquidityUrl} />,
+    <ApyCalculatorModal
+      lpLabel={lpLabel}
+      quoteTokenAdresses={quoteTokenAdresses}
+      quoteTokenSymbol={quoteTokenSymbol}
+      tokenAddresses={tokenAddresses}
+      cakePrice={cakePrice}
+      apy={apy}
+    />,
   )
 
-  const handleClickButton = (event): void => {
-    event.stopPropagation()
-    onPresentApyModal()
-  }
-
   return (
-    <IconButton onClick={handleClickButton} variant="text" scale="sm" ml="4px">
-      <CalculateIcon width="18px" />
+    <IconButton onClick={onPresentApyModal} variant="text" size="sm" ml="4px">
+      <CalculateIcon />
     </IconButton>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Text } from 'voidfarm-toolkit'
+import { Text } from '@pancakeswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 
 const Wrapper = styled.div`
@@ -29,11 +29,11 @@ const Legend = () => {
     <Wrapper>
       <LegendItem>
         <Circle isPoolSize />
-        <Text>{TranslateString(748, 'Pool Size')}</Text>
+        <Text>{TranslateString(999, 'Pool Size')}</Text>
       </LegendItem>
       <LegendItem>
         <Circle />
-        <Text>{TranslateString(750, 'Burned')}</Text>
+        <Text>{TranslateString(999, 'Burned')}</Text>
       </LegendItem>
     </Wrapper>
   )

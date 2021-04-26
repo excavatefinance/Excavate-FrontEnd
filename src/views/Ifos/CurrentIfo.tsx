@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Text, Heading, BaseLayout, Button, LinkExternal, Flex, Image } from 'voidfarm-toolkit'
+import { Text, Heading, BaseLayout, Button, LinkExternal, Flex, Image } from '@pancakeswap-libs/uikit'
 import { ifosConfig } from 'config/constants'
 import useI18n from 'hooks/useI18n'
 import IfoCard from './components/IfoCard'
@@ -53,10 +53,10 @@ const Ifo = () => {
           </List>
           <Flex mb="16px">
             <LinkExternal href="https://exchange.pancakeswap.finance/#/swap" mr="16px">
-              {TranslateString(1060, 'Buy CAKE')}
+              {TranslateString(999, 'Buy cake')}
             </LinkExternal>
-            <LinkExternal href="https://exchange.pancakeswap.finance/#/add/BNB/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82">
-              {TranslateString(1062, 'Get LP tokens')}
+            <LinkExternal href="https://exchange.pancakeswap.finance/#/add/ETH/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82">
+              {TranslateString(999, 'Get LP tokens')}
             </LinkExternal>
           </Flex>
           <Heading mb="16px">{TranslateString(600, 'During Sale')}:</Heading>

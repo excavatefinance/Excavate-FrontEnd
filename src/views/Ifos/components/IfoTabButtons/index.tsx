@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useRouteMatch, Link } from 'react-router-dom'
-import { ButtonMenu, ButtonMenuItem } from 'voidfarm-toolkit'
+import { ButtonMenu, ButtonMenuItem } from '@pancakeswap-libs/uikit'
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ const IfoTabButtons = () => {
 
   return (
     <Wrapper>
-      <ButtonMenu activeIndex={!isExact ? 1 : 0} scale="sm" variant="subtle">
+      <ButtonMenu activeIndex={!isExact ? 1 : 0} size="sm" variant="subtle">
         <ButtonMenuItem as={Link} to={`${url}`}>
           Next IFO
         </ButtonMenuItem>

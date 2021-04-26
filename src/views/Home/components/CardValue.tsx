@@ -1,26 +1,15 @@
 import React, { useEffect, useRef } from 'react'
 import { useCountUp } from 'react-countup'
-import { Text } from 'voidfarm-toolkit'
+import { Text } from '@pancakeswap-libs/uikit'
 
-export interface CardValueProps {
+interface CardValueProps {
   value: number
   decimals?: number
   fontSize?: string
-  lineHeight?: string
   prefix?: string
-  bold?: boolean
-  color?: string
 }
 
-const CardValue: React.FC<CardValueProps> = ({
-  value,
-  decimals,
-  fontSize = '40px',
-  lineHeight = '1',
-  prefix = '',
-  bold = true,
-  color = 'text',
-}) => {
+const CardValue: React.FC<CardValueProps> = ({ value, decimals, fontSize = '40px', prefix }) => {
   const { countUp, update } = useCountUp({
     start: 0,
     end: value,
@@ -38,9 +27,8 @@ const CardValue: React.FC<CardValueProps> = ({
   }, [value, updateValue])
 
   return (
-    <Text bold={bold} fontSize={fontSize} style={{ lineHeight }} color={color}>
-      {prefix}
-      {countUp}
+    <Text bold fontSize={fontSize}>
+      {prefix}{countUp}
     </Text>
   )
 }

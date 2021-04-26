@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
-import { useWeb3React } from '@web3-react/core'
-import { Heading, Card, CardBody, CardFooter, Text, PancakeRoundIcon, Flex, Skeleton } from 'voidfarm-toolkit'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
+import { Heading, Card, CardBody, CardFooter, Text, PancakeRoundIcon, Flex, Skeleton } from '@pancakeswap-libs/uikit'
 import { getBalanceNumber } from 'utils/formatBalance'
 import useI18n from 'hooks/useI18n'
 import { useTotalRewards } from 'hooks/useTickets'
@@ -50,7 +50,7 @@ const ExpandingWrapper = styled.div<{ showFooter: boolean }>`
 
 const TotalPrizesCard = () => {
   const TranslateString = useI18n()
-  const { account } = useWeb3React()
+  const { account } = useWallet()
   const [showFooter, setShowFooter] = useState(false)
   const lotteryPrizeAmount = +getBalanceNumber(useTotalRewards()).toFixed(0)
   const lotteryPrizeWithCommaSeparators = lotteryPrizeAmount.toLocaleString()
@@ -64,9 +64,7 @@ const TotalPrizesCard = () => {
             {currentLotteryNumber === 0 && <Skeleton height={20} width={56} />}
             {currentLotteryNumber > 0 && (
               <>
-                <Text fontSize="12px" style={{ fontWeight: 600 }}>
-                  {TranslateString(720, `Round #${currentLotteryNumber}`, { num: currentLotteryNumber })}
-                </Text>
+                <Text fontSize="12px" style={{ fontWeight: 600 }}>{`Round #${currentLotteryNumber}`}</Text>
               </>
             )}
           </Flex>
@@ -78,7 +76,7 @@ const TotalPrizesCard = () => {
             </IconWrapper>
             <PrizeCountWrapper>
               <Text fontSize="14px" color="textSubtle">
-                {TranslateString(722, 'Total Pot:')}
+                {TranslateString(999, 'Total Pot:')}
               </Text>
               <Heading size="lg">{lotteryPrizeWithCommaSeparators} CAKE</Heading>
             </PrizeCountWrapper>

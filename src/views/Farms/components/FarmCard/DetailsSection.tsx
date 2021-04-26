@@ -1,14 +1,19 @@
 import React from 'react'
 import useI18n from 'hooks/useI18n'
 import styled from 'styled-components'
-import { Text, Flex, Link, LinkExternal } from 'voidfarm-toolkit'
+import { Text, Flex, Link, LinkExternal } from '@pancakeswap-libs/uikit'
+import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
+import { Address } from 'config/constants/types'
 
 export interface ExpandableSectionProps {
+  isTokenOnly?: boolean
   bscScanAddress?: string
   removed?: boolean
   totalValueFormated?: string
   lpLabel?: string
-  addLiquidityUrl?: string
+  quoteTokenAdresses?: Address
+  quoteTokenSymbol?: string
+  tokenAddresses: Address
 }
 
 const Wrapper = styled.div`
@@ -31,23 +36,34 @@ const StyledLinkExternal = styled(LinkExternal)`
 `
 
 const DetailsSection: React.FC<ExpandableSectionProps> = ({
+  isTokenOnly,
   bscScanAddress,
   removed,
   totalValueFormated,
   lpLabel,
-  addLiquidityUrl,
+  quoteTokenAdresses,
+  quoteTokenSymbol,
+  tokenAddresses,
 }) => {
   const TranslateString = useI18n()
+  const liquidityUrlPathParts = getLiquidityUrlPathParts({ quoteTokenAdresses, quoteTokenSymbol, tokenAddresses })
 
   return (
     <Wrapper>
       <Flex justifyContent="space-between">
         <Text>{TranslateString(316, 'Stake')}:</Text>
-        <StyledLinkExternal href={addLiquidityUrl}>{lpLabel}</StyledLinkExternal>
+        <StyledLinkExternal href={
+          isTokenOnly ?
+            `https://exchange.goosedefi.com/#/swap/${tokenAddresses[process.env.REACT_APP_CHAIN_ID]}`
+            :
+          `https://exchange.goosedefi.com/#/add/${liquidityUrlPathParts}`
+        }>
+          {lpLabel}
+        </StyledLinkExternal>
       </Flex>
       {!removed && (
         <Flex justifyContent="space-between">
-          <Text>{TranslateString(354, 'Total Liquidity')}:</Text>
+          <Text>{TranslateString(23, 'Total Liquidity')}:</Text>
           <Text>{totalValueFormated}</Text>
         </Flex>
       )}

@@ -5,7 +5,6 @@ interface IfoCardWrapperProps {
 }
 
 const IfoCardWrapper = styled.div<IfoCardWrapperProps>`
-  align-items: start;
   border-top: 2px solid ${({ theme }) => theme.colors.textSubtle};
   display: grid;
   grid-template-columns: 1fr;

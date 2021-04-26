@@ -1,32 +1,25 @@
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useMemo, useState } from 'react'
-import { Button, Modal } from 'voidfarm-toolkit'
+import { Button, Modal } from '@pancakeswap-libs/uikit'
 import ModalActions from 'components/ModalActions'
-import TokenInput from 'components/TokenInput'
-import useI18n from 'hooks/useI18n'
-import { getFullDisplayBalance } from 'utils/formatBalance'
+import TokenInput from '../../../components/TokenInput'
+import useI18n from '../../../hooks/useI18n'
+import { getFullDisplayBalance } from '../../../utils/formatBalance'
 
 interface WithdrawModalProps {
   max: BigNumber
-  onConfirm: (amount: string, decimals: number) => void
+  onConfirm: (amount: string) => void
   onDismiss?: () => void
   tokenName?: string
-  stakingTokenDecimals?: number
 }
 
-const WithdrawModal: React.FC<WithdrawModalProps> = ({
-  onConfirm,
-  onDismiss,
-  max,
-  tokenName = '',
-  stakingTokenDecimals = 18,
-}) => {
+const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max, tokenName = '' }) => {
   const [val, setVal] = useState('')
   const [pendingTx, setPendingTx] = useState(false)
   const TranslateString = useI18n()
   const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(max, stakingTokenDecimals)
-  }, [max, stakingTokenDecimals])
+    return getFullDisplayBalance(max)
+  }, [max])
 
   const handleChange = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
@@ -56,7 +49,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
           disabled={pendingTx}
           onClick={async () => {
             setPendingTx(true)
-            await onConfirm(val, stakingTokenDecimals)
+            await onConfirm(val)
             setPendingTx(false)
             onDismiss()
           }}

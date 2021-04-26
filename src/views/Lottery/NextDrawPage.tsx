@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useWeb3React } from '@web3-react/core'
-import { BaseLayout } from 'voidfarm-toolkit'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
+import { BaseLayout } from '@pancakeswap-libs/uikit'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useTotalClaim } from 'hooks/useTickets'
 import YourPrizesCard from './components/YourPrizesCard'
@@ -38,7 +38,7 @@ const SecondCardColumnWrapper = styled.div<{ isAWin?: boolean }>`
 `
 
 const NextDrawPage: React.FC = () => {
-  const { account } = useWeb3React()
+  const { account } = useWallet()
   const { claimAmount } = useTotalClaim()
   const winnings = getBalanceNumber(claimAmount)
   const isAWin = winnings > 0
