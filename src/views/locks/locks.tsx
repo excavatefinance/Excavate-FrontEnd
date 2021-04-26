@@ -12,7 +12,6 @@ import useRefresh from 'hooks/useRefresh'
 
 import useI18n from 'hooks/useI18n'
 
-import FarmTabButtons from './components/FarmTabButtons'
 
 export interface FarmsProps{
   tokenMode?: boolean
