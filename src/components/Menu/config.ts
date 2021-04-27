@@ -21,7 +21,7 @@ const config: MenuEntry[] = [
     ],
   },
   {
-    label: 'Mines',
+    label: 'Quarry',
     icon: 'FarmIcon',
     href: '/farms',
   },
@@ -29,6 +29,11 @@ const config: MenuEntry[] = [
     label: 'Smelting',
     icon: 'PoolIcon',
     href: '/nests',
+  },
+  {
+    label: 'Mines',
+    icon: 'FarmIcon',
+    href: '/farms',
   },
   {
     label: 'LaunchPad',
