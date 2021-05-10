@@ -22,7 +22,7 @@ const config: MenuEntry[] = [
   },
   {
     label: 'Quarry',
-    icon: 'QuarryIcon',
+    icon: '',
     href: '/quarrys',
   },
   {
