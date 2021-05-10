@@ -27,7 +27,7 @@ const config: MenuEntry[] = [
   },
   {
     label: 'Smelting',
-    icon: 'PoolIcon',
+    icon: 'SmeltIcon',
     href: '/nests',
   },
   {
