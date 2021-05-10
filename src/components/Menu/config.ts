@@ -23,7 +23,7 @@ const config: MenuEntry[] = [
   {
     label: 'Quarry',
     icon: 'QuarryIcon',
-    href: '/farms',
+    href: '/quarrys',
   },
   {
     label: 'Smelting',
@@ -53,7 +53,7 @@ const config: MenuEntry[] = [
    {
      label: 'Nodes',
      icon: 'NodesIcon',
-     href: '/lottery',
+     href: '/nodes',
    },
   // {
   //   label: 'NFT',
