@@ -22,7 +22,7 @@ const config: MenuEntry[] = [
   },
   {
     label: 'Quarry',
-    icon: 'FarmIcon',
+    icon: 'QuarryIcon',
     href: '/farms',
   },
   {
@@ -52,7 +52,7 @@ const config: MenuEntry[] = [
   // },
    {
      label: 'Nodes',
-     icon: 'TicketIcon',
+     icon: 'NodesIcon',
      href: '/lottery',
    },
   // {
