@@ -31,8 +31,8 @@ const config: MenuEntry[] = [
     href: '/nests',
   },
   {
-    label: 'Mines',
-    icon: 'FarmIcon',
+    label: 'Mine',
+    icon: 'MineIcon',
     href: '/farms',
   },
   {
@@ -50,11 +50,11 @@ const config: MenuEntry[] = [
   //   icon: 'PoolIcon',
   //   href: '/pools',
   // },
-  // {
-  //   label: 'Lottery',
-  //   icon: 'TicketIcon',
-  //   href: '/lottery',
-  // },
+   {
+     label: 'Nodes',
+     icon: 'TicketIcon',
+     href: '/lottery',
+   },
   // {
   //   label: 'NFT',
   //   icon: 'NftIcon',
