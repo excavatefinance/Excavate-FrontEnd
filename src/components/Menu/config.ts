@@ -42,7 +42,7 @@ const config: MenuEntry[] = [
   },
  {
     label: 'Token Lockups',
-   icon: 'LockupsIcon',
+   icon: '',
    href: '/locks',
   },
   // {
