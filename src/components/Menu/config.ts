@@ -22,7 +22,7 @@ const config: MenuEntry[] = [
   },
   {
     label: 'Quarry',
-    icon: '',
+    icon: 'QuarryIcon',
     href: '/quarrys',
   },
   {
@@ -37,12 +37,12 @@ const config: MenuEntry[] = [
   },
   {
     label: 'LaunchPad',
-    icon: '',
+    icon: 'LaunchIcon',
     href: 'https://google.com',
   },
  {
     label: 'Token Lockups',
-   icon: '',
+   icon: 'LockupsIcon',
    href: '/locks',
   },
   // {
