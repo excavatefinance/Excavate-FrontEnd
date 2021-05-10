@@ -37,12 +37,12 @@ const config: MenuEntry[] = [
   },
   {
     label: 'LaunchPad',
-    icon: 'FarmIcon',
+    icon: 'LaunchIcon',
     href: 'https://google.com',
   },
  {
     label: 'Token Lockups',
-   icon: 'PoolIcon',
+   icon: 'LockupsIcon',
    href: '/locks',
   },
   // {
