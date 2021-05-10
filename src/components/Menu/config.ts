@@ -37,7 +37,7 @@ const config: MenuEntry[] = [
   },
   {
     label: 'LaunchPad',
-    icon: 'LaunchIcon',
+    icon: '',
     href: 'https://google.com',
   },
  {
