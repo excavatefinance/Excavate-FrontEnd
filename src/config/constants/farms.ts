@@ -26,7 +26,7 @@ const farms: FarmConfig[] = [
       97: '',
       56: '0xd1b59d11316e87c3a0a069e80f590ba35cd8d8d3',
     },
-    tokenSymbol: 'AXEs',
+    tokenSymbol: 'AXE',
     tokenAddresses: {
       97: '',
       56: '0xf5c581efb2BADa152BFCa8bE1960C27b23D69412',
@@ -195,7 +195,7 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
   },
-  {
+  /*{
     pid: 13,
     risk: 1,
     isTokenOnly: true,
@@ -381,7 +381,7 @@ const farms: FarmConfig[] = [
     },
     quoteTokenSymbol: QuoteToken.BNB,
     quoteTokenAdresses: contracts.wbnb,
-  },
+  },*/
 ]
 
 export default farms
