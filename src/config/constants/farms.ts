@@ -182,7 +182,7 @@ const farms: FarmConfig[] = [
     pid: 12,
     risk: 5,
     isTokenOnly: true,
-    lpSymbol: 'EGG',
+    lpSymbol: 'AXE',
     lpAddresses: {
       97: '',
       56: '0x19e7cbecdd23a16dfa5573df54d98f7caae03019', // EGG-BUSD LP

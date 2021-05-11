@@ -23,22 +23,22 @@ const config: MenuEntry[] = [
   {
     label: 'Quarry',
     icon: 'QuarryIcon',
-    href: '/quarrys',
+    href: '/quarry',
   },
   {
     label: 'Smelting',
     icon: 'SmeltIcon',
-    href: '/nests',
+    href: '/smelt',
   },
   {
     label: 'Mine',
     icon: 'MineIcon',
-    href: '/farms',
+    href: '/mine',
   },
   {
     label: 'LaunchPad',
     icon: 'LaunchIcon',
-    href: 'https://google.com',
+    href: '/launchpad',
   },
  {
     label: 'Token Lockups',
