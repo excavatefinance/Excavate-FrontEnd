@@ -114,7 +114,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           </Route>
         </FlexLayout>
       </div>
-		<div ClassName="smelt_farms">
+		<div className="smelt_farms">
      		 <Image src="/images/axe/mine_day.svg" alt="illustration" width={1352} height={587} responsive />
 		</div>
     </Page>
