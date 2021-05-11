@@ -43,7 +43,7 @@ const config: MenuEntry[] = [
  {
     label: 'Token Lockups',
    icon: 'LockupsIcon',
-   href: '/locks',
+   href: 'https://lockups.excavate.finance',
   },
   // {
   //   label: 'Pools',

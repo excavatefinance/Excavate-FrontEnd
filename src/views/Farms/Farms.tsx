@@ -96,7 +96,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           tokenMode ?
             TranslateString(10002, 'Stake tokens to earn EGG')
             :
-          TranslateString(320, 'Stake LP tokens to earn EGG')
+          TranslateString(320, 'Stake LP tokens to earn AXE')
         }
       </Heading>
       <Heading as="h2" color="secondary" mb="50px" style={{ textAlign: 'center' }}>
