@@ -26,7 +26,7 @@ const farms: FarmConfig[] = [
       97: '',
       56: '0xd1b59d11316e87c3a0a069e80f590ba35cd8d8d3',
     },
-    tokenSymbol: 'AXE',
+    tokenSymbol: 'AXEs',
     tokenAddresses: {
       97: '',
       56: '0xf5c581efb2BADa152BFCa8bE1960C27b23D69412',
