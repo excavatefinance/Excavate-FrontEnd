@@ -123,7 +123,7 @@
     {
       "data": {
         "stringId": 320,
-        "text": "Stake LP tokens to earn AXE"
+        "text": "Quarry LP tokens earn yourself some AXE"
       }
     },
     {
@@ -219,7 +219,7 @@
     {
       "data": {
         "stringId": 358,
-        "text": "Egg price"
+        "text": "Axe price"
       }
     },
     {
@@ -1209,7 +1209,7 @@
     {
       "data": {
         "stringId": 10000,
-        "text": "Deposit Fee will be used to buyback AXE"
+        "text": "Deposit Fee will be split 3 ways"
       }
     },
     {
@@ -1221,7 +1221,7 @@
     {
       "data": {
         "stringId": 10002,
-        "text": "Stake tokens to earn AXE"
+        "text": "Smelt Tokens to earn yourself some AXE"
       }
     },
     {
