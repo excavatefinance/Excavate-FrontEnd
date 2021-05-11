@@ -32,6 +32,7 @@
  					jQuery(".smelt").toggleClass("night");
     				jQuery(".hero").toggleClass("night");
     				jQuery(".mine__cart").toggleClass("night");
+    				jQuery(".smelt_farms").toggleClass("night");
   				});
 			});
 	</script>
@@ -70,6 +71,18 @@
   		background-position: top right;
   		min-height: 376px;		
 		}
+		.smelt_farms{
+		background-image: url('/images/axe/mine_day.svg');
+  		background-repeat: no-repeat;
+  		background-position: top right;
+  		min-height: 376px;			
+		}
+		.smelt_farms.night{
+		background-image: url('/images/axe/mine_night.svg');
+  		background-repeat: no-repeat;
+  		background-position: top right;
+  		min-height: 376px;			
+		}		
 		
 	</style>
   </head>
